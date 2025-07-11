@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
-#include <arpa/inet.h>
+#include <arpa/inet.h> // https://linux.die.net/man/3/htonl
 
 #define BUF_SIZE 65535
 
@@ -12,18 +12,22 @@ int main(int argc, char *argv[]) {
         exit(EXIT_FAILURE);
     }
 
+    // parse port
     int port = atoi(argv[1]);
     if (port <= 0 || port > 65535) {
         fprintf(stderr, "Invalid port number.\n");
         exit(EXIT_FAILURE);
     }
 
+    // initialize socket for IPv4
     int sockfd;
     if ((sockfd = socket(AF_INET, SOCK_DGRAM, 0)) < 0) {
         perror("socket");
         exit(EXIT_FAILURE);
     }
 
+
+    // initialize addr (INADDR_ANY) (AF_INET - IPv4)
     struct sockaddr_in servaddr;
     memset(&servaddr, 0, sizeof(servaddr));
     servaddr.sin_family = AF_INET;
