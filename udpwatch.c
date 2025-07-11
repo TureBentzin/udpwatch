@@ -40,9 +40,10 @@ int main(int argc, char *argv[]) {
     struct sockaddr_in cliaddr;
     socklen_t len = sizeof(cliaddr);
 
+    fprintf(stderr, "Attached to 0.0.0.0:%d\n", port);
+
     while (1) {
-        ssize_t n = recvfrom(sockfd, buffer, BUF_SIZE, 0,
-                             (struct sockaddr *)&cliaddr, &len);
+        ssize_t n = recvfrom(sockfd, buffer, BUF_SIZE, 0, (struct sockaddr *)&cliaddr, &len);
         if (n < 0) {
             perror("recvfrom");
             continue;
