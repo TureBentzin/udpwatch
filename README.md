@@ -1,5 +1,5 @@
 # udpwatch
-micro usp listener
+micro udp listener
 
 ## Usage
 
